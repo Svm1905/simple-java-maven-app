@@ -6,19 +6,25 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "mvn clean"
+               withMaven(maven: 'mvn') {
+            sh "mvn clean package"
+        }
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-              sh "mvn test"
+              withMaven(maven: 'mvn') {
+            sh "mvn clean package"
+        }
             }
         }
         stage('Compile') {
             steps {
                 echo 'Compiling....'
-              sh "mvn compile"
+              withMaven(maven: 'mvn') {
+            sh "mvn clean package"
+        }
             }
         }
     }
